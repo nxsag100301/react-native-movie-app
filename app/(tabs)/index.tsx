@@ -5,17 +5,20 @@ import { images } from '@/constants/images'
 import { fetchMovies } from '@/services/api'
 import useFetch from '@/services/useFetch'
 import { useRouter } from 'expo-router'
+import { useRef } from 'react'
 import {
   ActivityIndicator,
   FlatList,
   Image,
   ScrollView,
   Text,
+  TextInput,
   View
 } from 'react-native'
 
 export default function Index() {
   const router = useRouter()
+  const ref = useRef<TextInput>(null)
   const {
     data: movies,
     loading,
@@ -43,7 +46,7 @@ export default function Index() {
           <Text>Error: {error?.message}</Text>
         ) : (
           <View className='flex-1 mt-5'>
-            <SearchBar onPress={() => router.push('/search')} />
+            <SearchBar ref={ref} onPress={() => router.push('/search')} />
             <>
               <Text className='text-lg text-white font-bold mt-5 mb-3'>
                 Latest movies
