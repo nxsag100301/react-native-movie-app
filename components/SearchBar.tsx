@@ -1,6 +1,6 @@
-import { View, Image, TextInput, TouchableWithoutFeedback } from 'react-native'
 import { icons } from '@/constants/icons'
 import { forwardRef, useImperativeHandle, useRef } from 'react'
+import { Image, TextInput, TouchableWithoutFeedback, View } from 'react-native'
 
 interface Props {
   onPress?: () => void
@@ -8,7 +8,12 @@ interface Props {
   onChangeText?: (text: string) => void
 }
 
-const SearchBar = forwardRef<any, Props>(
+interface SearchBarRef {
+  focus: () => void
+  blur: () => void
+}
+
+const SearchBar = forwardRef<SearchBarRef, Props>(
   ({ onPress, value, onChangeText }, ref) => {
     const inputRef = useRef<TextInput>(null)
     useImperativeHandle(ref, () => ({
